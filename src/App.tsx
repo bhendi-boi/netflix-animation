@@ -1,10 +1,12 @@
 import { motion, animate } from "framer-motion";
+import { useRef } from "react";
 import netflix from "/netflix.png";
 import red from "/red.webp";
 import blue from "/blue.webp";
 import green from "/green.webp";
 
 function App() {
+  const image1Ref = useRef<HTMLImageElement>(null);
   function handleClick(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
     const image = e.currentTarget;
     const name = e.currentTarget.nextElementSibling;
@@ -63,12 +65,21 @@ function App() {
           left: ["50%", "82%"],
           scale: [2, 0.5],
         },
-        { type: "spring", duration: 1, damping: 30 },
+        { type: "spring", duration: 1, damping: 20 },
+      ],
+      [
+        "#button",
+        {
+          opacity: [0, 1],
+        },
+        {
+          delay: 1,
+        },
       ],
     ]);
   }
   return (
-    <main className="relative min-h-screen bg-gray-950">
+    <main className="relative min-h-screen font-sans bg-gray-950">
       <div
         id="backdrop"
         className="fixed inset-0 hidden select-none bg-gray-950"
@@ -83,6 +94,7 @@ function App() {
         <div className="relative grid grid-cols-2 gap-8 text-xs">
           <div className="relative flex flex-col items-center gap-2 cursor-pointer">
             <motion.img
+              ref={image1Ref}
               id="fm-1"
               onClick={handleClick}
               src={red}
@@ -122,6 +134,16 @@ function App() {
           </div>
         </div>
       </section>
+      <div id="button" className="relative z-20 opacity-0">
+        <button
+          onClick={() => {
+            window.location.reload();
+          }}
+          className="flex items-center justify-center px-6 py-3 mx-auto font-medium rounded bg-sky-600 text-gray-50 hover:opacity-90 active:opacity-80"
+        >
+          Start Again
+        </button>
+      </div>
     </main>
   );
 }
