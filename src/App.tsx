@@ -16,9 +16,11 @@ function App() {
       [
         image,
         {
-          position: ["relative", "fixed"],
+          position: ["relative", "absolute"],
           top: ["0%", "50%"],
           left: ["0%", "50%"],
+          x: ["0%", "-50%"],
+          y: ["0%", "-50%"],
           scale: [1, 2],
           z: 20,
         },
@@ -30,14 +32,19 @@ function App() {
           scale: [0, 0],
         },
         {
-          at: "-0.2",
+          at: "<",
         },
       ],
+    ]);
+    animate([
       [
         parentDiv,
         {
           position: ["relative", "static"],
-          zIndex: 10,
+          zIndex: [0, 10],
+        },
+        {
+          delay: 1,
         },
       ],
       [
@@ -50,22 +57,14 @@ function App() {
       [
         image,
         {
-          position: ["fixed", "fixed"],
-          top: ["50%", "50%"],
-          left: ["50%", "50%"],
-          scale: [2, 2],
-        },
-        { type: "spring", duration: 0.5 },
-      ],
-      [
-        image,
-        {
-          position: ["fixed", "fixed"],
+          position: ["absolute", "absolute"],
           top: ["50%", "1%"],
           left: ["50%", "82%"],
+          x: ["-50%", "0%"],
+          y: ["-50%", "0%"],
           scale: [2, 0.5],
         },
-        { type: "spring", duration: 1, damping: 20 },
+        { type: "spring", duration: 1.5, damping: 30 },
       ],
       [
         "#button",
@@ -89,9 +88,9 @@ function App() {
           <img src={netflix} alt="Netflix Logo" className="mx-auto" />
         </h1>
       </header>
-      <section className="relative flex flex-col items-center justify-center gap-8 text-gray-50">
+      <section className="flex flex-col items-center justify-center gap-8 text-gray-50">
         <h2 className="text-xl">Who's watching ?</h2>
-        <div className="relative grid grid-cols-2 gap-8 text-xs">
+        <div className="grid grid-cols-2 gap-8 text-xs">
           <div className="relative flex flex-col items-center gap-2 cursor-pointer">
             <motion.img
               ref={image1Ref}
@@ -139,7 +138,7 @@ function App() {
           onClick={() => {
             window.location.reload();
           }}
-          className="flex items-center justify-center px-6 py-3 mx-auto font-medium rounded bg-sky-600 text-gray-50 hover:opacity-90 active:opacity-80"
+          className="flex items-center justify-center px-6 py-3 mx-auto font-medium bg-blue-600 rounded text-gray-50 hover:opacity-90 active:opacity-80"
         >
           Start Again
         </button>
